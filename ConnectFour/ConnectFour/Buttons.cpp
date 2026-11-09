@@ -12,8 +12,8 @@ void Buttons::DrawButton()
 {
 	for (int i = 0; i < 7; i++)
 	{
-		DrawRectangleRec(m_button[i], BLACK);
-		DrawText("Press", static_cast<int>(m_button[i].x) + 50, static_cast<int>(m_button[i].y) + 15, 20, WHITE);
+		DrawRectangleRec(m_button[i], WHITE);
+		DrawText("Press", static_cast<int>(m_button[i].x) + 50, static_cast<int>(m_button[i].y) + 15, 20, BLACK);
 	}
 }
 
