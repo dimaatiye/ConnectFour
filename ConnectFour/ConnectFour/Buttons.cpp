@@ -16,3 +16,21 @@ void Buttons::DrawButton()
 		DrawText("Press", static_cast<int>(m_button[i].x) + 50, static_cast<int>(m_button[i].y) + 15, 20, WHITE);
 	}
 }
+
+int Buttons::CheckButtonClick()
+{
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+    {
+        Vector2 mousePosition = GetMousePosition();
+
+        for (int i = 0; i < 7; i++)
+        {
+            if (CheckCollisionPointRec(mousePosition, m_button[i]))
+            {
+                return i;
+            }
+        }
+    }
+
+    return -1;
+}
