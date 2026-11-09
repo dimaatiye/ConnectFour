@@ -17,9 +17,23 @@ void Board::DrawBoard()
     {
         for (int col = 0; col < 7; col++)
         {
-            DrawCircle(200 + (col * 250),250 + (row * 180),75,WHITE);
 
-            DrawCircle(200 + (col * 250),250 + (row * 180),65,BLACK);
+			int x = 200 + (col * 250);
+			int y = 250 + (row * 180);
+            DrawCircle(x, y, 75, WHITE);
+
+            if (m_grid[row][col] == 'X')
+            {
+                DrawCircle(x, y, 65, RED); // Draw player X's piece
+            }
+            else if (m_grid[row][col] == 'O')
+            {
+                DrawCircle(x, y, 65, YELLOW); // Draw player O's piece
+            }
+            else
+            {
+                DrawCircle(x, y, 65, BLACK); // Draw an empty space
+            }
         }
     }
 }

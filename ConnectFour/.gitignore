@@ -67,3 +67,8 @@ vcpkg_installed/
 Testing/
 .cache/
 .vs/
+
+# Visual Studio generated files
+*.idb
+*.pdb
+*.tlog
