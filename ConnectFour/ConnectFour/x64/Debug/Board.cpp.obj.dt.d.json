@@ -1,0 +1,12 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\dimaa\\desktop\\connect4 group\\connectfour\\connectfour\\connectfour\\board.cpp",
+        "ProvidedModule": "",
+        "Includes": [
+            "c:\\users\\dimaa\\desktop\\connect4 group\\connectfour\\connectfour\\connectfour\\board.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

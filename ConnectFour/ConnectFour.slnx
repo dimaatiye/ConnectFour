@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="ConnectFour/ConnectFour.vcxproj" />
+  <Project Path="ConnectFour/ConnectFour.vcxproj" Id="6ef96cbf-aba0-4e3c-89c5-675b58565975" />
 </Solution>

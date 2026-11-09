@@ -1,15 +1,18 @@
 #include "main.h"
 #include "raylib.h"
+#include "Buttons.h"
 
 int main(void)
 {
-    InitWindow(800, 450, "raylib example - basic window");
+    InitWindow(1900, 1300, "raylib example - basic window");
+    Buttons button;
+
 
     while (!WindowShouldClose())
     {
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
+        button.DrawButton();
         EndDrawing();
     }
 
