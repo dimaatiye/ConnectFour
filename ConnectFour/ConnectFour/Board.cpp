@@ -25,7 +25,16 @@ void Board::DrawBoard()
 }
 
 void Board::PlacePiece(int column, char piece)
-{}
+{
+    for (int row = 5; row >= 0; row--)
+    {
+        if (m_grid[row][column] == ' ')// Check if the current position is empty
+        {
+            m_grid[row][column] = piece;// Place the player's piece in the empty position
+            break;
+        }
+    }
+}
 
 bool Board::IsColumnFull(int column)
 {
