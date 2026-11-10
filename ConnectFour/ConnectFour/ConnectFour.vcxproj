@@ -117,13 +117,19 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)raylib-5.5_win64_msvc16\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)raylib-6.2_win64_msvc16\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)raylib-5.5_win64_msvc16\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>raylib.lib;winmm.lib;opengl32.lib;gdi32.lib;user32.lib;shell32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)raylib-6.2_win64_msvc16\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>raylib.lib
+;winmm.lib
+;gdi32.lib
+;opengl32.lib
+;user32.lib
+;shell32.lib;
+kernel32.lib;</AdditionalDependencies>
     </Link>
     <Manifest>
       <EnableSegmentHeap>true</EnableSegmentHeap>

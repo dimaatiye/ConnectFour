@@ -67,3 +67,7 @@ vcpkg_installed/
 Testing/
 .cache/
 .vs/
+
+# Dont ignore the raylib files
+!**/raylib-6.2_win64_msvc16/lib/*.lib
+!**/raylib-6.2_win64_msvc16/lib/*.dll
