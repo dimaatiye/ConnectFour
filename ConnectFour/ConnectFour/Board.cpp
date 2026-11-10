@@ -61,5 +61,18 @@ bool Board::IsColumnFull(int column)
 
 bool Board::CheckWin(char piece)
 {
+    for (int row = 0; row < 6; row++)// check left to right
+    {
+        for (int col = 0; col < 4; col++)
+        {
+            if (m_grid[row][col] == piece &&
+                m_grid[row][col + 1] == piece &&
+                m_grid[row][col + 2] == piece &&
+                m_grid[row][col + 3] == piece)
+            {
+                return true;
+            }
+        }
+    }
 	return false;
 }
