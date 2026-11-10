@@ -52,7 +52,11 @@ void Board::PlacePiece(int column, char piece)
 
 bool Board::IsColumnFull(int column)
 {
-	return false;
+    if (m_grid[0][column] != ' ')
+    {
+        return true; // column is full
+    }
+	return false; // column is not full
 }
 
 bool Board::CheckWin(char piece)
