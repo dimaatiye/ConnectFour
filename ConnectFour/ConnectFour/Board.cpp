@@ -74,5 +74,18 @@ bool Board::CheckWin(char piece)
             }
         }
     }
+    for (int row = 0; row < 3; row++)//check up to down
+    {
+        for (int col = 0; col < 7; col++)
+        {
+            if (m_grid[row][col] == piece &&
+                m_grid[row + 1][col] == piece &&
+                m_grid[row + 2][col] == piece &&
+                m_grid[row + 3][col] == piece)
+            {
+                return true;
+            }
+        }
+    }
 	return false;
 }
