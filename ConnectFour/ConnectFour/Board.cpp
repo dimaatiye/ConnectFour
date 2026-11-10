@@ -87,5 +87,32 @@ bool Board::CheckWin(char piece)
             }
         }
     }
+    for (int row = 3; row < 6; row++)//diagnal down left to up right
+    {
+        for (int col = 0; col < 4; col++)
+        {
+            if (m_grid[row][col] == piece &&
+                m_grid[row - 1][col + 1] == piece &&
+                m_grid[row - 2][col + 2] == piece &&
+                m_grid[row - 3][col + 3] == piece)
+            {
+                return true;
+            }
+        }
+    }
+    for (int row = 0; row < 3; row++)//diagnal down right to up left
+    {
+        for (int col = 0; col < 4; col++)
+        {
+            if (m_grid[row][col] == piece &&
+                m_grid[row + 1][col + 1] == piece &&
+                m_grid[row + 2][col + 2] == piece &&
+                m_grid[row + 3][col + 3] == piece)
+            {
+                return true;
+            }
+        }
+    }
+
 	return false;
 }
