@@ -10,6 +10,8 @@ private:
 	char m_grid[MAX_SIZE][MAX_SIZE];
 	int m_rows;
 	int m_cols;
+	int m_moveCount;
+	char m_winner;
 
 public:
 	Board();
@@ -19,9 +21,13 @@ public:
 	bool CheckWin(char piece);	
 	void RotateClockwise();
 	void ApplyGravityShift();
+	void MakeMove(int col, char piece);
+	bool IsBoardFull();
 
 	int GetRows() { return m_rows; }
 	int GetCols() { return m_cols; }
+	int GetMoveCount() { return m_moveCount; }
+	char GetWinner() { return m_winner; }
 
 };
 
