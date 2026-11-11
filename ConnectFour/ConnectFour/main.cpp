@@ -2,10 +2,11 @@
 #include "raylib.h"
 #include "Buttons.h"
 #include "Board.h"
+#include "Constants.h"
 
 int main(void)
 {
-    InitWindow(1900, 1300, "raylib example - basic window");
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT,  "Gravity Shift Connect 4");
     SetTargetFPS(60);
 
     Buttons button;
@@ -18,9 +19,9 @@ int main(void)
     while (!WindowShouldClose())
     {
 
-		int selectedColumn = button.CheckButtonClick();//check if any button is clicked and get the column index
+		int selectedColumn = button.CheckButtonClick(board.GetCols());//check if any button is clicked and get the column index
 
-		if (!gameOver && selectedColumn != -1 && !board.IsColumnFull(selectedColumn)) //check if a valid column is selected
+		if (!gameOver && selectedColumn != -1 && selectedColumn < board.GetCols() && !board.IsColumnFull(selectedColumn)) //check if a valid column is selected
 		{
 			board.PlacePiece(selectedColumn, currentPlayer);//place player's piece in the selected column
 
@@ -47,29 +48,29 @@ int main(void)
         ClearBackground(BLACK);
 
 
-        button.DrawButton();
+        button.DrawButton(board.GetCols());
         board.DrawBoard();
 
         if (gameOver)
         {
             if (winner == 'X')
             {
-                DrawText("Red Wins!", 50, 20, 50, RED);
+                DrawText("Game Over, Red Wins!", 740, 20, 50, RED);
             }
             else
             {
-                DrawText("Yellow Wins!", 50, 20, 50, YELLOW);
+                DrawText("Game Over, Yellow Wins!", 740, 20, 50, YELLOW);
             }
         }
         else
         {
             if (currentPlayer == 'X')
             {
-                DrawText("Reds Turn", 50, 20, 50, RED);
+                DrawText("Reds Turn", 800, 20, 50, RED);
             }
             else
             {
-                DrawText("Yellows Turn", 50, 20, 50, YELLOW);
+                DrawText("Yellows Turn", 800, 20, 50, YELLOW);
             }
         }
         EndDrawing();

@@ -1,10 +1,15 @@
 #include "Board.h"
+#include "Constants.h"
 
 Board::Board()
 {
-    for (int row = 0; row < 6; row++)
+    m_rows = 6;
+    m_cols = 7;
+
+
+    for (int row = 0; row < MAX_SIZE; row++)
     {
-        for (int col = 0; col < 7; col++)
+        for (int col = 0; col < MAX_SIZE; col++)
         {
             m_grid[row][col] = ' ';
         }
@@ -13,26 +18,30 @@ Board::Board()
 
 void Board::DrawBoard()
 {
-    for (int row = 0; row < 6; row++)
+    int left = GetBoardLeft(m_cols);
+
+    DrawRectangle(left, BOARD_TOP, m_cols * CELL_SIZE, m_rows * CELL_SIZE, BLUE);
+
+    for (int row = 0; row < m_rows; row++)
     {
-        for (int col = 0; col < 7; col++)
+        for (int col = 0; col < m_cols; col++)
         {
 
-			int x = 200 + (col * 250);
-			int y = 250 + (row * 180);
-            DrawCircle(x, y, 75, WHITE);
+            int x = left + col * CELL_SIZE + CELL_SIZE / 2;
+            int y = BOARD_TOP + row * CELL_SIZE + CELL_SIZE / 2;
+            float radius = CELL_SIZE / 2 - 12; // The -12 leaves a gap between spaces on the board
 
             if (m_grid[row][col] == 'X')
             {
-                DrawCircle(x, y, 65, RED); // Draw player X's piece
+                DrawCircle(x, y, radius, RED); // Draw player X's piece
             }
             else if (m_grid[row][col] == 'O')
             {
-                DrawCircle(x, y, 65, YELLOW); // Draw player O's piece
+                DrawCircle(x, y, radius, YELLOW); // Draw player O's piece
             }
             else
             {
-                DrawCircle(x, y, 65, BLACK); // Draw an empty space
+                DrawCircle(x, y, radius, BLACK); // Draw an empty space
             }
         }
     }
@@ -40,7 +49,7 @@ void Board::DrawBoard()
 
 void Board::PlacePiece(int column, char piece)
 {
-    for (int row = 5; row >= 0; row--)
+    for (int row = m_rows -1; row >= 0; row--)
     {
         if (m_grid[row][column] == ' ')// Check if the current position is empty
         {
@@ -61,9 +70,9 @@ bool Board::IsColumnFull(int column)
 
 bool Board::CheckWin(char piece)
 {
-    for (int row = 0; row < 6; row++)// check left to right
+    for (int row = 0; row < m_rows; row++)// check left to right
     {
-        for (int col = 0; col < 4; col++)
+        for (int col = 0; col < m_cols - 3; col++)
         {
             if (m_grid[row][col] == piece &&
                 m_grid[row][col + 1] == piece &&
@@ -74,9 +83,9 @@ bool Board::CheckWin(char piece)
             }
         }
     }
-    for (int row = 0; row < 3; row++)//check up to down
+    for (int row = 0; row < m_rows - 3; row++)//check up to down
     {
-        for (int col = 0; col < 7; col++)
+        for (int col = 0; col < m_cols; col++)
         {
             if (m_grid[row][col] == piece &&
                 m_grid[row + 1][col] == piece &&
@@ -87,9 +96,9 @@ bool Board::CheckWin(char piece)
             }
         }
     }
-    for (int row = 3; row < 6; row++)//diagnal down left to up right
+    for (int row = 3; row < m_rows; row++)//diagnal down left to up right
     {
-        for (int col = 0; col < 4; col++)
+        for (int col = 0; col < m_cols - 3; col++)
         {
             if (m_grid[row][col] == piece &&
                 m_grid[row - 1][col + 1] == piece &&
@@ -100,9 +109,9 @@ bool Board::CheckWin(char piece)
             }
         }
     }
-    for (int row = 0; row < 3; row++)//diagnal down right to up left
+    for (int row = 0; row < m_rows - 3; row++)//diagnal down right to up left
     {
-        for (int col = 0; col < 4; col++)
+        for (int col = 0; col < m_cols - 3; col++)
         {
             if (m_grid[row][col] == piece &&
                 m_grid[row + 1][col + 1] == piece &&

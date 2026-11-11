@@ -1,31 +1,42 @@
 #include "Buttons.h"
+#include "Constants.h"
 
-Buttons::Buttons()
+Rectangle Buttons::GetButtonRect(int index, int cols)
 {
-	for(int i = 0; i < 7; i++)
+    int left = GetBoardLeft(cols);
+
+    Rectangle rect;
+    rect.x = (float)(left + index * CELL_SIZE + 10); // 10 pixle gap on the left
+    rect.y = (float)BUTTON_TOP;
+    rect.width = (float)(CELL_SIZE - 20); // 10 pixel gap on each side
+    rect.height = (float)BUTTON_HEIGHT;
+    return rect;
+}
+
+
+void Buttons::DrawButton(int cols)
+{
+	for (int i = 0; i < cols; i++)
 	{
-		m_button[i] = { 100.0f + i * 250, 100, 200, 50 };
+        Rectangle rect = GetButtonRect(i, cols);
+        DrawRectangleRec(rect, WHITE);
+
+        int textWidth = MeasureText("Drop", 25);
+        int textX = (int)(rect.x + (rect.width - textWidth) / 2);
+        int textY = (int)(rect.y + 12);
+        DrawText("Drop", textX, textY, 25, BLACK);
 	}
 }
 
-void Buttons::DrawButton()
-{
-	for (int i = 0; i < 7; i++)
-	{
-		DrawRectangleRec(m_button[i], WHITE);
-		DrawText("Press", static_cast<int>(m_button[i].x) + 50, static_cast<int>(m_button[i].y) + 15, 20, BLACK);
-	}
-}
-
-int Buttons::CheckButtonClick()
+int Buttons::CheckButtonClick(int cols)
 {
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
         Vector2 mousePosition = GetMousePosition();
 
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i < cols; i++)
         {
-            if (CheckCollisionPointRec(mousePosition, m_button[i]))
+            if (CheckCollisionPointRec(mousePosition, GetButtonRect(i, cols)))
             {
                 return i;
             }
@@ -34,3 +45,4 @@ int Buttons::CheckButtonClick()
 
     return -1;
 }
+

@@ -4,12 +4,9 @@ class Buttons
 {
 
 private:
-	Rectangle m_button[7];
-
-
+	Rectangle GetButtonRect(int index, int cols);
 public:
-	Buttons();
-	void DrawButton();
-	int CheckButtonClick();
+	void DrawButton(int cols);
+	int CheckButtonClick(int cols);
 };
 
