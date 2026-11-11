@@ -17,6 +17,8 @@ public:
 	void PlacePiece(int column, char piece);
 	bool IsColumnFull(int column);
 	bool CheckWin(char piece);	
+	void RotateClockwise();
+	void ApplyGravityShift();
 
 	int GetRows() { return m_rows; }
 	int GetCols() { return m_cols; }

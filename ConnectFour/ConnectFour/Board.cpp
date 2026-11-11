@@ -125,3 +125,51 @@ bool Board::CheckWin(char piece)
 
 	return false;
 }
+
+void Board::RotateClockwise()
+{
+    // Copy the current board into temp and then clear it
+    char temp[MAX_SIZE][MAX_SIZE];
+    for (int row = 0; row < MAX_SIZE; row++)
+    {
+        for (int col = 0; col < MAX_SIZE; col++)
+        {
+            temp[row][col] = m_grid[row][col];
+            m_grid[row][col] = ' ';
+        }
+    }
+
+    // Swap the rows and cols, rows become cols, cols become rows
+    int oldRows = m_rows;
+    int oldCols = m_cols;
+    m_rows = oldCols;
+    m_cols = oldRows;
+
+    // Fill in the new grid from the temp one
+    for (int row = 0; row < m_rows; row++)
+    {
+        for (int col = 0; col < m_cols; col++)
+        {
+            m_grid[row][col] = temp[oldRows - 1 - col][row];
+        }
+    }
+}
+
+void Board::ApplyGravityShift()
+{
+    for (int col = 0; col < m_cols; col++)
+    {
+        int writeRow = m_rows - 1; 
+
+        for (int row = m_rows - 1; row >= 0; row--)
+        {
+            if (m_grid[row][col] != ' ')
+            {
+                char piece = m_grid[row][col];
+                m_grid[row][col] = ' ';
+                m_grid[writeRow][col] = piece;
+                writeRow--;
+            }
+        }
+    }
+}

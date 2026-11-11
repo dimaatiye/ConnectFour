@@ -43,6 +43,13 @@ int main(void)
             }
         }
 
+        // Temporary for testing
+        if (IsKeyReleased(KEY_R))
+        {
+            board.RotateClockwise();
+            board.ApplyGravityShift();
+        }
+
 
         BeginDrawing();
         ClearBackground(BLACK);
