@@ -3,7 +3,8 @@
 #include "Buttons.h"
 #include "Board.h"
 #include "Constants.h"
-
+#include "Menu.h"      
+#include "AiPlayer.h"  
 int main(void)
 {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT,  "Gravity Shift Connect 4");
@@ -13,24 +14,81 @@ int main(void)
     Board board;
     char currentPlayer = 'X'; // Player X starts
     bool gameOver = false;
-
+    Menu menu;
+    bool inMenu = true;
+    AiPlayer* aiX = nullptr; 
+    AiPlayer* aiO = nullptr; 
+    double lastMoveTime = 0; 
 
     while (!WindowShouldClose())
     {
-        // Allow the players to reset the game if a win or draw is reached
+        if (inMenu)
+        {
+            BeginDrawing();
+            ClearBackground(BLACK);
+            menu.UpdateAndDraw();
+            EndDrawing();
+
+            if (menu.IsFinished())
+            {
+                board = Board();
+                currentPlayer = 'X';
+                gameOver = false;
+                delete aiX;
+                delete aiO;
+                aiX = nullptr;
+                aiO = nullptr;
+
+                if (menu.GetGameMode() == PLAYER_VS_AI)
+                {
+                    aiO = menu.CreateAi('O'); 
+                }
+                else if (menu.GetGameMode() == AI_VS_AI)
+                {
+                    aiX = menu.CreateAi('X');
+                    aiO = menu.CreateAi('O');
+                }
+
+                lastMoveTime = GetTime();
+                inMenu = false;
+            }
+
+            continue; 
+        }
+
+        if (IsKeyReleased(KEY_M))
+        {
+            menu.Reset();
+            inMenu = true;
+            continue;
+        }
+
         if (IsKeyReleased(KEY_R))
         {
             board = Board();
             currentPlayer = 'X';
             gameOver = false;
         }
+        int selectedColumn = -1;
+        AiPlayer* currentAi = aiO;
+        if (currentPlayer == 'X')
+        {
+            currentAi = aiX;
+        }
 
-		int selectedColumn = button.CheckButtonClick(board.GetCols());//check if any button is clicked and get the column index
+        if (currentAi == nullptr)
+        {
+            selectedColumn = button.CheckButtonClick(board.GetCols());//check if any button is clicked and get the column index
+        }
+        else if (!gameOver && GetTime() - lastMoveTime >= 0.6) // wait 0.6 seconds so you can see the AI move
+        {
+            selectedColumn = currentAi->ChooseMove(board);
+        }
 
-		if (!gameOver && selectedColumn != -1 && selectedColumn < board.GetCols() && !board.IsColumnFull(selectedColumn)) //check if a valid column is selected
+		if (!gameOver && selectedColumn != -1 && selectedColumn < board.GetCols() && !board.IsColumnFull(selectedColumn))
 		{
             board.MakeMove(selectedColumn, currentPlayer);
-
+            lastMoveTime = GetTime();
             if (board.GetWinner() != ' ')
             {
                 // Player has won
@@ -95,7 +153,8 @@ int main(void)
 
         EndDrawing();
     }
-
+    delete aiX;
+    delete aiO;
     CloseWindow();
 
     return 0;

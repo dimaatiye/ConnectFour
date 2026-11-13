@@ -10,6 +10,8 @@ const int BUTTON_TOP = 100; // Y pos of the buttons
 const int BUTTON_HEIGHT = 50;
 const int BOARD_TOP = 170; // Y pos of the top of the board
 
+
+
 // Works out the X pos of the boards left edge so the board can be centered, takes cols as argument because board will be narrower after gravity shift
 inline int GetBoardLeft(int cols)
 {

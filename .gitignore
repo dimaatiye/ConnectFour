@@ -85,3 +85,5 @@ Testing/
 *.ilk
 *.obj
 *.exe
+ConnectFour/ConnectFour/ConnectFour.vcxproj
+ConnectFour/ConnectFour/ConnectFour.vcxproj.filters
