@@ -157,6 +157,7 @@ kernel32.lib;</AdditionalDependencies>
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AiPlayer.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Buttons.h" />
     <ClInclude Include="Constants.h" />
