@@ -30,6 +30,12 @@
     <ClInclude Include="AiPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MiniMaxAi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MonteCarloAi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -39,6 +45,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Buttons.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniMaxAi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MonteCarloAi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

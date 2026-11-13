@@ -162,11 +162,15 @@ kernel32.lib;</AdditionalDependencies>
     <ClInclude Include="Buttons.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="MiniMaxAi.h" />
+    <ClInclude Include="MonteCarloAi.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Buttons.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MiniMaxAi.cpp" />
+    <ClCompile Include="MonteCarloAi.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

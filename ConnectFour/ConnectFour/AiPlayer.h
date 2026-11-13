@@ -25,5 +25,6 @@ public:
 	virtual ~AiPlayer() {}
 
 	virtual int ChooseMove(Board board) = 0;
+	virtual void SetDifficulty(int t_difficulty) = 0;
 };
 
