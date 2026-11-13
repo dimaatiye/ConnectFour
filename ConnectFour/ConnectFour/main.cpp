@@ -78,7 +78,7 @@ int main(void)
 
         if (currentAi == nullptr)
         {
-            selectedColumn = button.CheckButtonClick(board.GetCols());//check if any button is clicked and get the column index
+            selectedColumn = button.CheckButtonClick(board.GetCols());
         }
         else if (!gameOver && GetTime() - lastMoveTime >= 0.6) // wait 0.6 seconds so you can see the AI move
         {

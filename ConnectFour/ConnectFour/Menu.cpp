@@ -28,7 +28,7 @@ bool Menu::DrawMenuButton(const char* t_text, int t_x, int t_y)
 
 	if (hovered)
 	{
-		DrawRectangleRec(rect, YELLOW);
+		DrawRectangleRec(rect, YELLOW); 
 	}
 	else
 	{
