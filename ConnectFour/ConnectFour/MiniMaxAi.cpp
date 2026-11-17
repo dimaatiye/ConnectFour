@@ -18,6 +18,33 @@ std::vector<int> MiniMaxAi::IsGamepadAvailableMoves(Board t_board)
 	return availableMoves;//return all available cols
 }
 
+int MiniMaxAi::EvaluationBoard(Board t_board)
+{
+	int score = 0;// collects the overall evaluation score for the board
+	for (int row=0; row< t_board.GetRows(); row++)
+	{
+		for (int col = 0; col < t_board.GetCols(); col++) {
+			if (col + 3 < t_board.GetCols()) // Check horizontal
+			{
+				score += EvaluateWindow(t_board, row, col, 0, 1);
+			}
+			if (row + 3 < t_board.GetRows()) // Check vertical
+			{
+				score += EvaluateWindow(t_board, row, col, 1, 0);
+			}
+			if (row + 3 < t_board.GetRows() && col + 3 < t_board.GetCols()) // Check diagonal down-right
+			{
+				score += EvaluateWindow(t_board, row, col, 1, 1);
+			}
+			if (row - 3 >= 0 && col + 3 < t_board.GetCols()) // Check diagonal up-right
+			{
+				score += EvaluateWindow(t_board, row, col, -1, 1);
+			}
+		}
+	}
+	return 0;
+}
+
 int MiniMaxAi::EvaluateWindow(Board t_board, int row, int col, int rowDir, int colDir)
 {
 	int myCount = 0;
