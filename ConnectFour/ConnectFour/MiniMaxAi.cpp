@@ -1,4 +1,6 @@
 #include "MiniMaxAi.h"
+// what is miniman? its a algorithm where min and max are both trying to win, 
+// min will always pic the worst move for max and max will pick the best foe itself.
 
 
 
