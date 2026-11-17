@@ -1,5 +1,11 @@
 #include "MiniMaxAi.h"
 
+
+
+
+//how minimax is working
+//step1: get all available moves
+
 std::vector<int> MiniMaxAi::IsGamepadAvailableMoves(Board t_board)
 {
 	std::vector<int> availableMoves; // creates an empty list of moves
