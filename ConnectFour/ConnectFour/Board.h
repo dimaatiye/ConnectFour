@@ -28,6 +28,7 @@ public:
 	int GetCols() { return m_cols; }
 	int GetMoveCount() { return m_moveCount; }
 	char GetWinner() { return m_winner; }
+	char GetCell(int row, int col) { return m_grid[row][col]; }
 
 };
 
