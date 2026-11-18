@@ -230,3 +230,23 @@ bool Board::IsBoardFull()
     }
     return true; // Every col is full
 }
+
+std::vector<int> Board::GetValidMoves()
+{
+    std::vector<int> moves;
+
+    if (m_winner != ' ')
+    {
+        return moves;
+    }
+
+    for (int col = 0; col < m_cols; col++)
+    {
+        if (!IsColumnFull(col))
+        {
+            moves.push_back(col);
+        }
+    }
+
+    return moves;
+}

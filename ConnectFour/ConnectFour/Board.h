@@ -1,5 +1,6 @@
 #pragma once
 #include "raylib.h"
+#include <vector>
 
 const int MAX_SIZE = 7; // Max size a board can be in either dimension, switches when rotating the board
 
@@ -29,6 +30,8 @@ public:
 	int GetMoveCount() { return m_moveCount; }
 	char GetWinner() { return m_winner; }
 	char GetCell(int row, int col) { return m_grid[row][col]; }
+
+	std::vector<int> GetValidMoves();
 
 };
 
