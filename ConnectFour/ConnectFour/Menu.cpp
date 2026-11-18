@@ -119,11 +119,11 @@ AiPlayer* Menu::CreateAi(char t_piece)
 
 		if (m_difficulty == EASY)
 		{
-			ai->SetDifficulty(2); 
+			ai->SetDifficulty(1); 
 		}
 		else
 		{
-			ai->SetDifficulty(4); 
+			ai->SetDifficulty(3); 
 		}
 	}
 	else
