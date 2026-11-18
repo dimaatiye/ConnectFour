@@ -112,6 +112,15 @@ int MiniMaxAi::MiniMax(Board t_board, int t_depth, bool t_maxTurn) //depth is ho
 		}
 		return bestScore;
 	}
+	int bestScore = std::numeric_limits<int>::max();
+	for (int move : availableMoves)
+	{
+		Board childBoard = t_board;
+		childBoard.MakeMove(move, m_opponentPiece);
+		int score = MiniMax(childBoard, t_depth + 1, true);
+		bestScore = std::min(bestScore, score);
+	}
+	return bestScore;
 }
 
 void MiniMaxAi::SetDifficulty(int t_difficulty)
