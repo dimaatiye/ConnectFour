@@ -121,3 +121,20 @@ char MonteCarloAi::Simulate(Node* t_node)
 
 	return board.GetWinner();
 }
+
+void MonteCarloAi::BackPropagate(Node* t_node, char t_result)
+{
+	Node* current = t_node;
+
+	while (current != nullptr)
+	{
+		current->visits++;
+
+		if (current->playerWhoMoved == t_result)
+		{
+			current->wins++;
+		}
+
+		current = current->parent;
+	}
+}

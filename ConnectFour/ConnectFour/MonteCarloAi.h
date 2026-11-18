@@ -43,5 +43,7 @@ public:
 	Node* Select(Node* t_node); // Start at the root and if it has children, work out their UCT and find the best, then explore that nodes children until the frontier is found
 	Node* Expand(Node* t_node); // Starts at the frontier node found by Select(); makes a valid move then creates a new node with a board where that move has been made for each valid move
 	char Simulate(Node* t_node); // Takes a copy of a nodes board and keeps making random valid moves until the game ends, returns the winner
+	void BackPropagate(Node* t_node, char t_result); // Starting from the node the simulate function ran on, add one to visits, and one to wins if a player has won then move back up the tree node by node doing this for each 
+
 };
 
