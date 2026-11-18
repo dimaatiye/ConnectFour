@@ -113,7 +113,9 @@ int MiniMaxAi::MiniMax(Board t_board, int t_depth, bool t_maxTurn, int alpha, in
 			alpha = std::max(alpha, bestScore);//update alhpa every time we find a better score for max
 			if (beta <= alpha)//if beta is less than or equal to alpha, we can stop searching this branch
 			{
+				m_prunedBranches++;
 				break; // Beta cut-off
+
 			}
 		}
 		return bestScore;
@@ -128,7 +130,9 @@ int MiniMaxAi::MiniMax(Board t_board, int t_depth, bool t_maxTurn, int alpha, in
 		beta = std::min(beta, bestScore);
 		if (beta <= alpha)
 		{
+			m_prunedBranches++;
 			break;
+
 		}
 	}
 	return bestScore;
@@ -180,5 +184,6 @@ int MiniMaxAi::ChooseMove(Board t_board)
 		}
 
 	}
+	std::cout << "Pruned branches: " << m_prunedBranches << std::endl;
 	return bestMove;
 }
