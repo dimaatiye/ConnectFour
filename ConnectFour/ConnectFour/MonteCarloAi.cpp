@@ -2,13 +2,42 @@
 
 void MonteCarloAi::SetDifficulty(int t_difficulty)
 {
-	m_iterations = t_difficulty;
+	// Default values
+	m_exploration = std::sqrt(2.0);
+	m_iterations = 1000;
 }
 
 int MonteCarloAi::ChooseMove(Board t_board)
 {
-	// This is where the Monte Carlo implementation will live
-	return 0;
+	if (t_board.GetValidMoves().empty())
+	{
+		return -1;
+	}
+
+	Node* root = new Node(t_board, -1, m_opponentPiece, nullptr);
+
+	for (int i = 0; i < m_iterations; i++)
+	{
+		Node* leaf = Select(root);
+		Node* nodeToSimulate = Expand(leaf);
+		char result = Simulate(nodeToSimulate);
+		BackPropagate(nodeToSimulate, result);
+	}
+
+	Node* bestChild = root->children[0];
+	for (int i = 1; i < (int)root->children.size(); i++)
+	{
+		if (root->children[i]->visits > bestChild->visits)
+		{
+			bestChild = root->children[i];
+		}
+	}
+
+	int bestMove = bestChild->move;
+
+	DeleteTree(root);
+
+	return bestMove;
 }
 
 double MonteCarloAi::CalculateUCT(Node* t_node)
@@ -126,6 +155,7 @@ void MonteCarloAi::BackPropagate(Node* t_node, char t_result)
 {
 	Node* current = t_node;
 
+	// The root of the tree has no parent node so when NullPtr is found, the loop will stop
 	while (current != nullptr)
 	{
 		current->visits++;
@@ -134,7 +164,16 @@ void MonteCarloAi::BackPropagate(Node* t_node, char t_result)
 		{
 			current->wins++;
 		}
-
+		// Move backwards up the tree
 		current = current->parent;
 	}
+}
+
+void MonteCarloAi::DeleteTree(Node* t_node)
+{
+	for (int i = 0; i < (int)t_node->children.size(); i++)
+	{
+		DeleteTree(t_node->children[i]);
+	}
+	delete t_node;
 }

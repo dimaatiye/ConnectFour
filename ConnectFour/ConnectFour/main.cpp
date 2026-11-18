@@ -68,6 +68,7 @@ int main(void)
             board = Board();
             currentPlayer = 'X';
             gameOver = false;
+            lastMoveTime = GetTime();
         }
         int selectedColumn = -1;
         AiPlayer* currentAi = aiO;
