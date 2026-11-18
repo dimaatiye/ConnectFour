@@ -5,6 +5,7 @@
 #include "Constants.h"
 #include "Menu.h"      
 #include "AiPlayer.h"  
+#include "MiniMaxAi.h"
 int main(void)
 {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT,  "Gravity Shift Connect 4");

@@ -1,6 +1,7 @@
 #include "MiniMaxAi.h"
 #include <limits>
 #include <algorithm>
+#include <iostream>
 // what is miniman? its a algorithm where min and max are both trying to win, 
 // min will always pic the worst move for max and max will pick the best foe itself.
 
@@ -79,7 +80,7 @@ int MiniMaxAi::EvaluateWindow(Board t_board, int row, int col, int rowDir, int c
 	return 0;
 }
 
-int MiniMaxAi::MiniMax(Board t_board, int t_depth, bool t_maxTurn) //depth is how far we have searched
+int MiniMaxAi::MiniMax(Board t_board, int t_depth, bool t_maxTurn, int alpha, int beta) //depth is how far we have searched
 {
 	if (t_board.CheckWin(m_myPiece)) // Check if the AI has won
 	{
@@ -107,9 +108,13 @@ int MiniMaxAi::MiniMax(Board t_board, int t_depth, bool t_maxTurn) //depth is ho
 		{
 			Board copyBoard = t_board;//create a copey of the board
 			copyBoard.MakeMove(move, m_myPiece);// place the ai piece
-			int score = MiniMax(copyBoard, t_depth + 1, false);
+			int score = MiniMax(copyBoard, t_depth + 1, false, alpha, beta);
 			bestScore = std::max(bestScore, score);// the highest scre we found so far
-
+			alpha = std::max(alpha, bestScore);//update alhpa every time we find a better score for max
+			if (beta <= alpha)//if beta is less than or equal to alpha, we can stop searching this branch
+			{
+				break; // Beta cut-off
+			}
 		}
 		return bestScore;
 	}
@@ -118,15 +123,35 @@ int MiniMaxAi::MiniMax(Board t_board, int t_depth, bool t_maxTurn) //depth is ho
 	{
 		Board childBoard = t_board;
 		childBoard.MakeMove(move, m_opponentPiece);
-		int score = MiniMax(childBoard, t_depth + 1, true);
+		int score = MiniMax(childBoard, t_depth + 1, true, alpha, beta);
 		bestScore = std::min(bestScore, score);
+		beta = std::min(beta, bestScore);
+		if (beta <= alpha)
+		{
+			break;
+		}
 	}
 	return bestScore;
 }
 
 void MiniMaxAi::SetDifficulty(int t_difficulty)
 {
-	m_maxDepth = t_difficulty;
+	if (t_difficulty == 1)
+	{
+		m_maxDepth = 2;
+	}
+	else if(t_difficulty == 2)
+	{
+		m_maxDepth = 4;
+	}
+	else if (t_difficulty == 3)
+	{
+		m_maxDepth = 6;
+	}
+	else
+	{
+		m_maxDepth = 2;
+	}
 }
 
 int MiniMaxAi::ChooseMove(Board t_board)
@@ -145,13 +170,15 @@ int MiniMaxAi::ChooseMove(Board t_board)
 		//Places the AI's piece (O) in the column we're currently testing.
 		copyBoard.MakeMove(move, m_myPiece);
 		//starts the Minimax search at depth 0 because we're beginning a new search for this particular move
-		int score = MiniMax(copyBoard, 0, false);
+		int score = MiniMax(copyBoard, 0, false, std::numeric_limits<int>::min(), std::numeric_limits<int>::max());//aplha starts the lowest possible, beta starts the highest possible
+		std::cout << "Column: " << move << " Score: " << score << std::endl;
 		//Checks if the current move has a higher score than the best score we've found.
 		if (score > bestScore)
 		{
 			bestScore = score;
 			bestMove = move;
 		}
+
 	}
 	return bestMove;
 }
