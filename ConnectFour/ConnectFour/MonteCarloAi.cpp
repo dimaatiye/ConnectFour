@@ -86,3 +86,38 @@ Node* MonteCarloAi::Expand(Node* t_node)
 
 	return t_node->children[0];
 }
+
+char MonteCarloAi::Simulate(Node* t_node)
+{
+	Board board = t_node->board;
+
+	char currentPlayer;
+	if (t_node->playerWhoMoved == 'X')
+	{
+		currentPlayer = 'O';
+	}
+	else
+	{
+		currentPlayer = 'X';
+	}
+
+	// Keeps running till a win happens or the board is full
+	while (board.GetWinner() == ' ')
+	{
+		std::vector<int> moves = board.GetValidMoves();
+		// Make random move from the vector of valid moves
+		int randomIndex = GetRandomValue(0, (int)moves.size() - 1);
+		board.MakeMove(moves[randomIndex], currentPlayer);
+
+		if (currentPlayer == 'X')
+		{
+			currentPlayer = 'O';
+		}
+		else
+		{
+			currentPlayer = 'X';
+		}
+	}
+
+	return board.GetWinner();
+}
