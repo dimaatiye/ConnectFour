@@ -24,3 +24,32 @@ double MonteCarloAi::CalculateUCT(Node* t_node)
 
 	return exploitation + exploration;
 }
+
+Node* MonteCarloAi::Select(Node* t_node)
+{
+	Node* current = t_node;
+	
+	// if children is empty we have reached the frontier
+	while (!current->children.empty())
+	{
+		// Assume the first child is best 
+		Node* bestChild = current->children[0];
+		double bestUCT = CalculateUCT(bestChild);
+
+		for (int i = 1; i < (int)current->children.size(); i++)
+		{
+			// Work out the UCT for each child of the current node
+			double uct = CalculateUCT(current->children[i]);
+
+			if (uct > bestUCT)
+			{
+				bestUCT = uct;
+				bestChild = current->children[i];
+			}
+		}
+		// Set the currently explored node to be the best one found in the loop, then if it has child nodes, run the loop for those
+		current = bestChild;
+	}
+
+	return current;
+}
