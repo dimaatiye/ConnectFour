@@ -1,11 +1,12 @@
 #include "MiniMaxAi.h"
+#include <limits>
 // what is miniman? its a algorithm where min and max are both trying to win, 
 // min will always pic the worst move for max and max will pick the best foe itself.
 
 //how minimax is working
 //step1: get all available moves
 
-std::vector<int> MiniMaxAi::IsGamepadAvailableMoves(Board t_board)
+std::vector<int> MiniMaxAi::GetAvailableMoves(Board t_board)
 {
 	std::vector<int> availableMoves; // creates an empty list of moves
 	for (int col = 0; col < t_board.GetCols(); col++) //gets the curerent number of cols
@@ -75,6 +76,42 @@ int MiniMaxAi::EvaluateWindow(Board t_board, int row, int col, int rowDir, int c
 	if (opponentCount == 1) return -1;
 
 	return 0;
+}
+
+int MiniMaxAi::MiniMax(Board t_board, int t_depth, bool t_maxTurn) //depth is how far we have searched
+{
+	if (t_board.CheckWin(m_myPiece)) // Check if the AI has won
+	{
+		return 100000; // Return a high score for a win
+	}
+	if (t_board.CheckWin(m_opponentPiece)) // Check if the opponent has won
+	{
+		return -100000; // Return a low score for a loss
+	}
+	if (t_board.IsBoardFull())
+	{
+		return 0;
+	}
+	if (t_depth == m_maxDepth) // Check if the maximum depth has been reached
+	{
+		return EvaluationBoard(t_board); // Evaluate the board and return the score
+	}
+
+	std::vector<int> availableMoves = GetAvailableMoves(t_board);
+
+	if (t_maxTurn)//explore possible moves, trus is maxs turn
+	{
+		int bestScore = std::numeric_limits<int>::min();//returns the tiniest value, so ai can find something better
+		for (int move : availableMoves)//loop through avainlabe moves
+		{
+			Board copyBoard = t_board;//create a copey of the board
+			copyBoard.MakeMove(move, m_myPiece);// place the ai piece
+			int score = MiniMax(copyBoard, t_depth + 1, false);
+			bestScore = std::max(bestScore, score);// the highest scre we found so far
+
+		}
+		return bestScore;
+	}
 }
 
 void MiniMaxAi::SetDifficulty(int t_difficulty)
