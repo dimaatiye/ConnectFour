@@ -1,5 +1,6 @@
 #include "MiniMaxAi.h"
 #include <limits>
+#include <algorithm>
 // what is miniman? its a algorithm where min and max are both trying to win, 
 // min will always pic the worst move for max and max will pick the best foe itself.
 
@@ -43,7 +44,7 @@ int MiniMaxAi::EvaluationBoard(Board t_board)
 			}
 		}
 	}
-	return 0;
+	return score;
 }
 
 int MiniMaxAi::EvaluateWindow(Board t_board, int row, int col, int rowDir, int colDir)
@@ -131,5 +132,26 @@ void MiniMaxAi::SetDifficulty(int t_difficulty)
 int MiniMaxAi::ChooseMove(Board t_board)
 {
 	// This is where the MiniMax implementation will be
-	return 0;
+	//1 get available moves
+	std::vector<int> availableMoves = GetAvailableMoves(t_board);
+	//2inisilaise bestscore and bestmove
+	int bestScore = std::numeric_limits<int>::min();
+	int bestMove = -1;
+	//3 loop through all available moves 
+	for (int move : availableMoves)
+	{
+		//Creates a copy of the current board
+		Board copyBoard = t_board;
+		//Places the AI's piece (O) in the column we're currently testing.
+		copyBoard.MakeMove(move, m_myPiece);
+		//starts the Minimax search at depth 0 because we're beginning a new search for this particular move
+		int score = MiniMax(copyBoard, 0, false);
+		//Checks if the current move has a higher score than the best score we've found.
+		if (score > bestScore)
+		{
+			bestScore = score;
+			bestMove = move;
+		}
+	}
+	return bestMove;
 }
