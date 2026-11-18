@@ -53,3 +53,36 @@ Node* MonteCarloAi::Select(Node* t_node)
 
 	return current;
 }
+
+
+Node* MonteCarloAi::Expand(Node* t_node)
+{
+	std::vector<int> moves = t_node->board.GetValidMoves();
+
+	// If no valid moves exist return the argument node
+	if (moves.empty())
+	{
+		return t_node;
+	}
+
+	char nextPlayer;
+	if (t_node->playerWhoMoved == 'X')
+	{
+		nextPlayer = 'O';
+	}
+	else
+	{
+		nextPlayer = 'X';
+	}
+
+	for (int i = 0; i < (int)moves.size(); i++)
+	{
+		Board childBoard = t_node->board;
+		childBoard.MakeMove(moves[i], nextPlayer);
+
+		Node* child = new Node(childBoard, moves[i], nextPlayer, t_node);
+		t_node->children.push_back(child);
+	}
+
+	return t_node->children[0];
+}

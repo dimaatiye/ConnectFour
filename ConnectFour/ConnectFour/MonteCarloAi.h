@@ -41,5 +41,6 @@ public:
 	int ChooseMove(Board t_board) override;
 	double CalculateUCT(Node* t_node); // Calculates the upper confidence bound for the tree search
 	Node* Select(Node* t_node); // Start at the root and if it has children, work out their UCT and find the best, then explore that nodes children until the frontier is found
+	Node* Expand(Node* t_node); 
 };
 
