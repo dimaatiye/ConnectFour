@@ -1,0 +1,21 @@
+Experiment,game,aiA,settingA,aiB,settingB,aColour,winner,scoreForA,totalMoves,redAvgMs,yellowAvgMs,illegalMove
+Head to head,1,Minimax,4,MCTS,1000,Red,X,1,27,4.68963,20.0358,no
+Head to head,2,Minimax,4,MCTS,1000,Yellow,X,0,15,29.1201,4.4571,no
+Head to head,3,Minimax,4,MCTS,1000,Red,X,1,9,6.84577,34.8152,no
+Head to head,4,Minimax,4,MCTS,1000,Yellow,X,0,19,25.5981,4.00491,no
+Head to head,5,Minimax,4,MCTS,1000,Red,O,0,14,5.03728,29.7661,no
+Head to head,6,Minimax,4,MCTS,1000,Yellow,X,0,17,25.6844,4.65374,no
+Head to head,7,Minimax,4,MCTS,1000,Red,X,1,23,5.86015,21.925,no
+Head to head,8,Minimax,4,MCTS,1000,Yellow,D,0.5,24,23.3252,4.92321,no
+Head to head,9,Minimax,4,MCTS,1000,Red,X,1,17,6.32126,23.5704,no
+Head to head,10,Minimax,4,MCTS,1000,Yellow,X,0,19,26.4249,5.46691,no
+Head to head,11,Minimax,4,MCTS,1000,Red,O,0,18,4.8764,24.4209,no
+Head to head,12,Minimax,4,MCTS,1000,Yellow,X,0,19,27.4074,4.52077,no
+Head to head,13,Minimax,4,MCTS,1000,Red,X,1,13,6.19367,31.6124,no
+Head to head,14,Minimax,4,MCTS,1000,Yellow,O,1,16,24.5294,6.48167,no
+Head to head,15,Minimax,4,MCTS,1000,Red,X,1,17,6.97565,29.9293,no
+Head to head,16,Minimax,4,MCTS,1000,Yellow,X,0,20,24.9212,3.43234,no
+Head to head,17,Minimax,4,MCTS,1000,Red,O,0,16,5.86014,24.531,no
+Head to head,18,Minimax,4,MCTS,1000,Yellow,X,0,20,25.7006,4.95329,no
+Head to head,19,Minimax,4,MCTS,1000,Red,X,1,21,5.36097,21.7035,no
+Head to head,20,Minimax,4,MCTS,1000,Yellow,D,0.5,24,24.1064,3.70653,no
