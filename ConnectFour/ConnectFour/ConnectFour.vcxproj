@@ -165,6 +165,7 @@ kernel32.lib;</AdditionalDependencies>
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MiniMaxAi.h" />
     <ClInclude Include="MonteCarloAi.h" />
+    <ClInclude Include="Tournament.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
@@ -173,6 +174,7 @@ kernel32.lib;</AdditionalDependencies>
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MiniMaxAi.cpp" />
     <ClCompile Include="MonteCarloAi.cpp" />
+    <ClCompile Include="Tournament.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

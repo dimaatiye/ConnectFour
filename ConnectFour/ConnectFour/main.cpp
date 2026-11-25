@@ -6,8 +6,17 @@
 #include "Menu.h"      
 #include "AiPlayer.h"  
 #include "MiniMaxAi.h"
-int main(void)
+#include <string>
+#include "Tournament.h"
+
+int main(int argumentCount, char* argumentValue[])
 {
+    if (argumentCount > 1 && std::string(argumentValue[1]) == "--tournament")
+    {
+        RunTournament();
+        return 0;
+    }
+
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT,  "Gravity Shift Connect 4");
     SetTargetFPS(60);
 
