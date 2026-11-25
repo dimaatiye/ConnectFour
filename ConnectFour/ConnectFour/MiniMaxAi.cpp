@@ -140,22 +140,23 @@ int MiniMaxAi::MiniMax(Board t_board, int t_depth, bool t_maxTurn, int alpha, in
 
 void MiniMaxAi::SetDifficulty(int t_difficulty)
 {
-	if (t_difficulty == 1)
-	{
-		m_maxDepth = 2;
-	}
-	else if(t_difficulty == 2)
-	{
-		m_maxDepth = 4;
-	}
-	else if (t_difficulty == 3)
-	{
-		m_maxDepth = 6;
-	}
-	else
-	{
-		m_maxDepth = 2;
-	}
+	//if (t_difficulty == 1)
+	//{
+	//	m_maxDepth = 2;
+	//}
+	//else if(t_difficulty == 2)
+	//{
+	//	m_maxDepth = 4;
+	//}
+	//else if (t_difficulty == 3)
+	//{
+	//	m_maxDepth = 6;
+	//}
+	//else
+	//{
+	//	m_maxDepth = 2;
+	//}
+	m_maxDepth = t_difficulty;
 }
 
 int MiniMaxAi::ChooseMove(Board t_board)
@@ -175,7 +176,7 @@ int MiniMaxAi::ChooseMove(Board t_board)
 		copyBoard.MakeMove(move, m_myPiece);
 		//starts the Minimax search at depth 0 because we're beginning a new search for this particular move
 		int score = MiniMax(copyBoard, 0, false, std::numeric_limits<int>::min(), std::numeric_limits<int>::max());//aplha starts the lowest possible, beta starts the highest possible
-		std::cout << "Column: " << move << " Score: " << score << std::endl;
+		//std::cout << "Column: " << move << " Score: " << score << std::endl;
 		//Checks if the current move has a higher score than the best score we've found.
 		if (score > bestScore)
 		{
@@ -184,6 +185,6 @@ int MiniMaxAi::ChooseMove(Board t_board)
 		}
 
 	}
-	std::cout << "Pruned branches: " << m_prunedBranches << std::endl;
+	//std::cout << "Pruned branches: " << m_prunedBranches << std::endl;
 	return bestMove;
 }

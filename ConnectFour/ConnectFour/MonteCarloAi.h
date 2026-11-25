@@ -33,7 +33,7 @@ private:
 public:
 	MonteCarloAi(char t_myPiece) : AiPlayer(t_myPiece)
 	{
-		// m_iterations = number
+		m_iterations = 100;
 		m_exploration = std::sqrt(2.0);
 	}
 

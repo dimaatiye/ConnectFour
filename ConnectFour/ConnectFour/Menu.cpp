@@ -132,7 +132,7 @@ AiPlayer* Menu::CreateAi(char t_piece)
 
 		if (m_difficulty == EASY)
 		{
-			ai->SetDifficulty(1000); 
+			ai->SetDifficulty(500); 
 		}
 		else
 		{

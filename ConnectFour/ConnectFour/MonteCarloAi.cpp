@@ -4,7 +4,7 @@ void MonteCarloAi::SetDifficulty(int t_difficulty)
 {
 	// Default values
 	m_exploration = std::sqrt(2.0);
-	m_iterations = 1000;
+	m_iterations = t_difficulty;
 }
 
 int MonteCarloAi::ChooseMove(Board t_board)
