@@ -165,6 +165,7 @@ kernel32.lib;</AdditionalDependencies>
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MiniMaxAi.h" />
     <ClInclude Include="MonteCarloAi.h" />
+    <ClInclude Include="RandomAi.h" />
     <ClInclude Include="Tournament.h" />
   </ItemGroup>
   <ItemGroup>
