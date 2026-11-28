@@ -263,7 +263,37 @@ void RunTournament()
 	}
 	csv << "Experiment,game,aiA,settingA,aiB,settingB,aColour,winner,scoreForA,totalMoves,redAvgMs,yellowAvgMs,illegalMove\n";
 
-	RunMatch("Head to head", AI_MINIMAX, 4, AI_MCTS, 1000, 20, 2, csv);
+	// Experiments
+	const int GAMES = 200; // Games per whole match, 200 gives a confidence of about +/- 7%
+
+	// 1. Baseline of each Ai vs an Ai that only plays random moves
+	RunMatch("Baseline vs Random", AI_MCTS, 1000, AI_RANDOM, 0, GAMES, 2, csv);
+	RunMatch("Baseline vs Random", AI_MINIMAX, 4, AI_RANDOM, 0, GAMES, 2, csv);
+
+	// 2. MCTS at different iteration levels vs MCTS fixed at 1000, does more thinking improve results?
+	int iterations[] = { 100,500,1000,2000,5000,10000 };
+	for (int i = 0; i < 6; i++)
+	{
+		RunMatch("MCTS variable iterations vs MCTS Fixed", AI_MCTS, iterations[i], AI_MCTS, 1000, GAMES, 2, csv);
+	}
+
+	// 3. MiniMax at different depth levels vs MCTS fixed at 1000 iterations
+	for (int depth = 1; depth <= 6; depth++)
+	{
+		RunMatch("MiniMax variable depth vs MCTS Fixed", AI_MINIMAX, depth, AI_MCTS, 1000, GAMES, 2, csv);
+	}
+
+	// 4. Head to head: MCTS at 1000 vs 5000 iterations against MiniMax at depth levels 2, 4  and 6
+	int mctsSettings[] = { 1000, 5000 };
+	int minimaxDepths[] = { 2, 4, 6 };
+	for (int m = 0; m < 2; m++)
+	{
+		for (int d = 0; d < 3; d++)
+		{
+			RunMatch("4 Head to head", AI_MCTS, mctsSettings[m], AI_MINIMAX, minimaxDepths[d], GAMES, 2, csv);
+		}
+	}
+
 
 	std::cout << "\nDone. Results saved to results.csv\n";
 }
